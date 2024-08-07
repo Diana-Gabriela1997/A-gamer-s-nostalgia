@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+
+@font-face {
+  font-family: "Pixelated2";
+  src: url("ARCADECLASSIC.TTF") format("truetype"); /* Add other formats if available */
+}
+
+:root {
+  --primary-bg-color: #77e4c8;
+  --primary-text-color: #4535c1;
+  --secondary-color: #478ccf;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Pixelated2", sans-serif;
+  background-color: var(--primary-bg-color);
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.items.center {
+  align-items: center;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.p-25 {
+  padding: 25px;
+}
+
+.bg-dark {
+  background-color: var(--secondary-color);
+}
+
+.navbar a,
+i {
+  color: var(--primary-text-color);
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.navbar h3 i {
+  font-size: 20px;
+  padding-top: 15px;
+}
+
+.logo {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 30px;
+}
