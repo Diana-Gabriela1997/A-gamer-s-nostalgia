@@ -14,6 +14,7 @@
     />
 
     <title>A gamer's nostalgia</title>
+    <link rel="stylesheet" href="../css/admin.css" />
   </head>
   <body>
     <div class="container">
@@ -29,9 +30,42 @@
           <a href="cart.html">Cart</a>
         </div>
       </div>
-      <div class="main"></div>
-      <h1>Admin</h1>
+      <div class="main">
+        <h1>Admin Page</h1>
+        <form id="product-form">
+          <div>
+            <label for="name">Product name</label>
+            <input type="text" id="name" />
+          </div>
+          <div>
+            <label for="price">Price</label>
+            <input type="number" step="any" id="price" />
+          </div>
+          <div>
+            <label for="image-url">Image URL</label>
+            <input type="text" id="image-url" />
+          </div>
+          <div>
+            <label for="details">Details</label>
+            <input type="text" id="details" />
+          </div>
+          <button id="save-btn" class="arcade-font">Save product</button>
+        </form>
+        <table id="products-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Prices</th>
+              <th>Image</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
       <div class="footer"></div>
+      <script type="module" src="../js/admin.js"></script>
     </div>
   </body>
 </html>
