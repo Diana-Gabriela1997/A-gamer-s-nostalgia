@@ -1,4 +1,11 @@
-const url = "https://66b20d561ca8ad33d4f65330.mockapi.io/products";
+import {
+  getAllProducts,
+  getProductById,
+  deleteProduct,
+  addNewProduct,
+  updateProduct,
+} from "../api/products.js";
+import { mapProductToAdminTableRow } from "../utils/layout.js";
 
 // Load products in table at page loading
 const productsTableBody = document
@@ -7,55 +14,28 @@ const productsTableBody = document
 
 document.addEventListener("DOMContentLoaded", displayAllProducts);
 
-function getAllProducts() {
-  return fetch(url).then((response) => response.json());
+async function displayAllProducts() {
+  const products = await getAllProducts();
+
+  productsTableBody.innerHTML = products
+    .map(mapProductToAdminTableRow)
+    .join("");
 }
 
-function getproductById(id) {
-  return fetch(`${url}/${id}`).then((response) => response.json());
-}
-
-function displayAllProducts() {
-  getAllProducts().then((products) => {
-    productsTableBody.innerHTML = products
-      .map(
-        (product) => `
-            <tr>
-                <td>${product.name}</td>
-                <td>${product.price}</td>
-                <td>
-                    <img src=${product.imageUrl} width="50px" />
-                </td>
-                <td>
-                <button class="edit-${product.id}">
-                <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                </td>
-                <td>
-                <button class="delete-${product.id}">
-                <i class="fa-solid fa-trash"></i>
-                </button>
-                </td>
-            </tr>
-            `
-      )
-      .join("");
-  });
-}
-
-//Save new product
+// save new product
 const form = document.getElementById("product-form");
 const nameInput = document.getElementById("name");
 const priceInput = document.getElementById("price");
 const imageUrlInput = document.getElementById("image-url");
 const detailsInput = document.getElementById("details");
+const yearOfReleaseInput = document.getElementById("yearOfRelease");
 const saveProductButton = document.getElementById("save-btn");
 let editMode = false;
 let currentEditableProductId;
 
 saveProductButton.addEventListener("click", saveProduct);
 
-function saveProduct(event) {
+async function saveProduct(event) {
   event.preventDefault();
 
   const product = {
@@ -63,51 +43,51 @@ function saveProduct(event) {
     price: Number(priceInput.value),
     imageUrl: imageUrlInput.value,
     details: detailsInput.value,
+    yearOfRelease: Number(yearOfReleaseInput.value),
   };
 
-  fetch(editMode ? `${url}/${currentEditableProductId}` : url, {
-    method: editMode ? "PUT" : "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(product),
-  }).then(() => {
-    form.reset();
-    displayAllProducts();
-    editMode = false;
-  });
+  if (editMode) {
+    const editedProduct = await updateProduct(
+      product,
+      currentEditableProductId
+    );
+    if (editedProduct !== null) {
+      form.reset();
+      displayAllProducts();
+      editMode = false;
+    }
+  } else {
+    const newProduct = await addNewProduct(product);
+    if (newProduct !== null) {
+      form.reset();
+      displayAllProducts();
+    }
+  }
 }
-
-// Edit product
+// edit product
 productsTableBody.addEventListener("click", handleActions);
 
-function handleActions(event) {
+async function handleActions(event) {
   const className = event.target.parentElement.className;
   if (className.includes("edit")) {
     const productId = className.split("-")[1];
     editProduct(productId);
   } else if (className.includes("delete")) {
     const productId = className.split("-")[1];
-    deleteProduct(productId);
+    await deleteProduct(productId);
+    await displayAllProducts();
   }
 }
 
 function editProduct(id) {
-  getproductById(id).then((product) => {
+  getProductById(id).then((product) => {
     editMode = true;
     nameInput.value = product.name;
     priceInput.value = product.price;
     imageUrlInput.value = product.imageUrl;
     detailsInput.value = product.details;
+    yearOfReleaseInput.value = product.yearOfRelease;
 
     currentEditableProductId = product.id;
-  });
-}
-
-function deleteProduct(id) {
-  fetch(`${url}/${id}`, {
-    method: "DELETE",
-  }).then(() => {
-    displayAllProducts();
   });
 }

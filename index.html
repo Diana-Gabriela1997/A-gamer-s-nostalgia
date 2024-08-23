@@ -17,7 +17,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="navbar flex justify-around items-center bg-dark p-25">
+      <div class="navbar flex justify-around items-center bg-dark p-5">
         <div class="logo">
           <h3>
             <i class="fa-solid fa-gamepad fa-beat-fade"></i>
@@ -29,7 +29,14 @@
           <a href="pages/cart.html">Cart</a>
         </div>
       </div>
-      <div class="main flex wrap gap-50 p-50 justify-between"></div>
+      <div class="flex">
+        <div class="filters">
+          <h4>Year of release</h4>
+          <div class="years badge bg-light-blue w-100"></div>
+        </div>
+        <div class="main flex wrap gap-50 p-50 justify-between"></div>
+      </div>
+
       <div class="footer"></div>
     </div>
     <script type="module" src="index.js"></script>

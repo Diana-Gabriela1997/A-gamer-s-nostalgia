@@ -1,8 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
 
 @font-face {
-  font-family: "Pixelated2";
-  src: url("ARCADECLASSIC.TTF") format("truetype"); /* Add other formats if available */
+  font-family: "ArcadeClassic";
+  src: url("ArcadeClassic.TTF") format("truetype"); /* Add other formats if available */
+}
+
+.arcade-font {
+  font-family: "ArcadeClassic"; /* Apply the Arcade Classic font */
+  font-size: 18px; /* Optional: Adjust font size */
+  color: #4535c1; /* Optional: Change color */
 }
 
 :root {
@@ -17,7 +23,7 @@
 }
 
 body {
-  font-family: "Pixelated2", sans-serif;
+  font-family: "ArcadeClassic", sans-serif;
   background-color: var(--primary-bg-color);
 }
 
@@ -38,6 +44,10 @@ body {
   justify-content: space-between;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .items-center {
   align-items: center;
 }
@@ -46,12 +56,16 @@ body {
   gap: 10px;
 }
 
+.gap-20 {
+  gap: 20px;
+}
+
 .gap-50 {
   gap: 50px;
 }
 
-.p-20 {
-  padding: 20px;
+.p-5 {
+  padding: 5px;
 }
 
 .bg-dark {
@@ -88,9 +102,54 @@ body {
 
 .product-card {
   background-color: var(--primary-bg-color);
-  width: 200px;
+  width: 150px;
   text-align: center;
   padding: 15px 5px;
   border: 2px solid var(--secondary-color);
   border-radius: 10px;
+}
+
+.w-150 {
+  width: 150px;
+}
+
+.w-300 {
+  width: 300px;
+}
+
+.w-500 {
+  width: 500px;
+}
+
+.h-40 {
+  height: 40px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid gray;
+}
+
+.filters {
+  padding-top: 50px;
+}
+
+.years {
+  padding-left: 10px;
+}
+
+.badge {
+  border-radius: 10px;
+  background-color: #bfff00;
+  padding: 10px 10px;
+}
+
+.w-100 {
+  width: 100px;
+}
+
+.year-filter {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  cursor: pointer;
 }
